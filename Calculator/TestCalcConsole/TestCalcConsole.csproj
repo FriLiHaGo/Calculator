@@ -59,6 +59,10 @@
       <Project>{664d9db7-af8b-4c4c-a737-1d7f30fdad71}</Project>
       <Name>CalcConsole</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CalcLibrary\CalcLibrary.csproj">
+      <Project>{039e7338-0f69-4c72-951f-3244456a71cf}</Project>
+      <Name>CalcLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

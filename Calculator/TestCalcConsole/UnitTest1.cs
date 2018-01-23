@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CalcLibrary;
 
 namespace TestCalcConsole
 {
@@ -12,7 +13,7 @@ namespace TestCalcConsole
             //arrange
             var x = 10;
             var y = 1;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Sum(x, y);
             //assert
@@ -25,7 +26,7 @@ namespace TestCalcConsole
             //arrange
             var x = 10;
             var y = 1;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Sub(x, y);
             //assert
@@ -38,7 +39,7 @@ namespace TestCalcConsole
             //arrange
             var x = 1.2;
             var y = 1.1;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Sum(x, y);
             //assert
@@ -51,7 +52,7 @@ namespace TestCalcConsole
             //arrange
             var x = 1;
             var y = 0.5;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Sub(x, y);
             //assert
@@ -64,7 +65,7 @@ namespace TestCalcConsole
             //arrange
             var x = 0.25;
             var y = 4.0;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Mul(x, y);
             //assert
@@ -77,7 +78,7 @@ namespace TestCalcConsole
             //arrange
             var x = 1;
             var y = 4;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Div(x, y);
             //assert
@@ -89,7 +90,7 @@ namespace TestCalcConsole
         {
             //arrange
             var x = 2.0;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Square(x);
             //assert
@@ -101,7 +102,7 @@ namespace TestCalcConsole
         {
             //arrange
             var x = 4.0;
-            var calc = new CalcConsole.Calc();
+            var calc = new Calc();
             //act
             var result = calc.Sqrt(x);
             //assert

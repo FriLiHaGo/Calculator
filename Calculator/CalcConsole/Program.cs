@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CalcLibrary;
 
 namespace CalcConsole
 {
@@ -10,16 +11,16 @@ namespace CalcConsole
     {
         static void Main(string[] args)
         {
+            Calc c = new Calc();
             if (args.Length == 3)
             {
                 int a, b;
                 int.TryParse(args[1], out a);
                 int.TryParse(args[2], out b);
-                var oper = args[0];
-                if (oper == "sum")
+                string operat = args[0];
+                if (operat == "sum")
                     Console.WriteLine($"{a} + {b} = {a + b}");
             }
-            Calc calc = new Calc();
             while (true)
             {
                 Console.WriteLine("Выберите операцию: \n" +
@@ -31,34 +32,18 @@ namespace CalcConsole
                     "sqrt - Извлечение корня\n" +
                     "Для выхода из программы нажмите e");
                 Console.Write("Ввод: ");
-                string selOper = Console.ReadLine();
-                switch(selOper)
-                {
-                    case "sum":
-                        PerfomBin("sum", calc.Sum);
-                        break;
-                    case "sub":
-                        PerfomBin("sub", calc.Sub);
-                        break;
-                    case "mul":
-                        PerfomBin("mul", calc.Mul);
-                        break;
-                    case "div":
-                        PerfomBin("div", calc.Div);
-                        break;
-                    case "square":
-                        PerfomUn("square", calc.Square);
-                        break;
-                    case "sqrt":
-                        PerfomUn("sqrt", calc.Sqrt);
-                        break;
-                    case "e":
-                        Environment.Exit(0);
-                        break;
-                    default:
-                        Console.WriteLine("Неверная операция, повторите ввод\n");
-                        break;
-                }
+
+                string oper = Console.ReadLine();
+                string x = Console.ReadLine();
+                string y = Console.ReadLine();
+
+                Double result = double.NaN;
+                Calc calc = new Calc();
+
+                result = calc.Exec(oper, new[] { x, y });
+
+                Console.WriteLine($"{oper}({x}, {y}) = {result}");
+                Console.ReadKey();
             }
         }
 
