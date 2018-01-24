@@ -12,11 +12,7 @@ namespace CalcLibrary.Operations
 
         public override IOperationResult Exec(IEnumerable<double> args)
         {
-            var result = (args.Count() >= 2)
-                ? args.ElementAt(0) / args.ElementAt(1)
-                : double.NaN;
-
-            return new OperResult(result, null);
+            return new OperResult(args.Aggregate((a, b) => a / b), null);
         }
     }
 }

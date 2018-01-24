@@ -1,6 +1,7 @@
 ﻿using CalcLibrary.Operations;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -14,17 +15,37 @@ namespace CalcLibrary
         {
             Operations = new List<IOperation>();
 
-            var curAssemly = Assembly.GetExecutingAssembly();
-            var types = curAssemly.GetTypes();
-            foreach (var type in types)
+            // операции из текущей сборки
+            var curAssembly = Assembly.GetExecutingAssembly();
+            LoadOperations(curAssembly);
+
+            // операции из других
+            var pathExtentions = Path.Combine(Environment.CurrentDirectory, "extention");
+
+            if (Directory.Exists(pathExtentions))
+            {
+                var asseblies = Directory.GetFiles(pathExtentions, "*.dll");
+
+                foreach (var fileName in asseblies)
+                {
+                    LoadOperations(Assembly.LoadFile(fileName));
+                }
+            }
+        }
+
+        private void LoadOperations(Assembly assembly)
+        {
+            var Types = assembly.GetTypes();
+            var typeOperations = typeof(IOperation);
+            foreach (var type in Types)
             {
                 if (type.IsAbstract || type.IsInterface)
                     continue;
                 var interfaces = type.GetInterfaces();
-                if (interfaces.Contains(typeof(IOperation)))
+                if (interfaces.Contains(typeOperations))
                 {
                     var obj = Activator.CreateInstance(type) as IOperation;
-                    if(obj != null)
+                    if (obj != null)
                     {
                         Operations.Add(obj);
                     }
@@ -67,13 +88,7 @@ namespace CalcLibrary
 
         public string[] GetOperations()
         {
-            int n = Operations.Count;
-            string[] listOfOperations = new string[n];
-            for(int i = 0; i < n; i++)
-            {
-                listOfOperations[i] = Operations.ElementAt(i).Name;
-            }
-            return listOfOperations;
+            return Operations.Select(o => o.Name).ToArray();
         }
 
         #region Int
