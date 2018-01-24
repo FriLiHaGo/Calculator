@@ -11,39 +11,39 @@ namespace CalcConsole
     {
         static void Main(string[] args)
         {
-            Calc c = new Calc();
             if (args.Length == 3)
             {
-                int a, b;
-                int.TryParse(args[1], out a);
-                int.TryParse(args[2], out b);
-                string operat = args[0];
-                if (operat == "sum")
+                int.TryParse(args[1], out int a);
+                int.TryParse(args[2], out int b);
+                string oper = args[0];
+                if (oper == "sum")
                     Console.WriteLine($"{a} + {b} = {a + b}");
             }
+
+            Calc calc = new Calc();
             while (true)
             {
-                Console.WriteLine("Выберите операцию: \n" +
-                    "sum - Сложение\n" +
-                    "sub - Вычитание\n" +
-                    "mul - Умножение\n" +
-                    "div - Деление\n" +
-                    "square - Возведение в квадрат\n" +
-                    "sqrt - Извлечение корня\n" +
-                    "Для выхода из программы нажмите e");
+                Console.WriteLine("Список доступных операций:");
+                foreach (var item in calc.GetOperations())
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine("Для выхода из программы нажмите e");
                 Console.Write("Ввод: ");
 
                 string oper = Console.ReadLine();
-                string x = Console.ReadLine();
-                string y = Console.ReadLine();
+                if(oper == "e")
+                {
+                    Environment.Exit(0);
+                }
+
+                Console.WriteLine("Введиете переменные: ");
+                string[] arguments = Console.ReadLine().Split(' ');
 
                 Double result = double.NaN;
-                Calc calc = new Calc();
+                result = calc.Exec(oper, arguments);
 
-                result = calc.Exec(oper, new[] { x, y });
-
-                Console.WriteLine($"{oper}({x}, {y}) = {result}");
-                Console.ReadKey();
+                Console.WriteLine($"{oper}({string.Join(", ", arguments)}) = {result}\n");
             }
         }
 

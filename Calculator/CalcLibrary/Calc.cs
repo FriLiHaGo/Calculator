@@ -14,7 +14,7 @@ namespace CalcLibrary
         {
             Operations = new List<IOperation>();
 
-            var curAssemly= Assembly.GetExecutingAssembly();
+            var curAssemly = Assembly.GetExecutingAssembly();
             var types = curAssemly.GetTypes();
             foreach (var type in types)
             {
@@ -65,6 +65,16 @@ namespace CalcLibrary
             return double.NaN;
         }
 
+        public string[] GetOperations()
+        {
+            int n = Operations.Count;
+            string[] listOfOperations = new string[n];
+            for(int i = 0; i < n; i++)
+            {
+                listOfOperations[i] = Operations.ElementAt(i).Name;
+            }
+            return listOfOperations;
+        }
 
         #region Int
         [Obsolete("Не использовать")]
