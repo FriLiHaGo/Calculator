@@ -16,6 +16,7 @@ namespace DesktopCalc
     {
         private Calc Calc { get; set; }
         private bool IsInputEnter { get; set; }
+        private System.Threading.Timer timer;
 
         public Form1()
         {
@@ -50,11 +51,17 @@ namespace DesktopCalc
 
         private void tbInput_TextChanged(object sender, EventArgs e)
         {
-            btnCalc.Enabled = !string.IsNullOrWhiteSpace(tbInput.Text);
+            timer?.Dispose();
 
+            btnCalc.Enabled = !string.IsNullOrWhiteSpace(tbInput.Text);
+            
             if (string.IsNullOrWhiteSpace(tbInput.Text))
             {
                 lblResult.Text = string.Empty;
+            }
+            else
+            {
+                timer = new System.Threading.Timer(new TimerCallback(ToExec), null, 1000, -1);
             }
         }
 
@@ -63,7 +70,9 @@ namespace DesktopCalc
             if (!string.IsNullOrWhiteSpace(tbInput.Text) && e.KeyCode == Keys.Enter)
             {
                 IsInputEnter = true;
-                btnCalc_Click(sender, e);
+                var oper = lbOperations.SelectedItem.ToString();
+                var result = Calc.Exec(oper, tbInput.Text.Trim().Split(' '));
+                lblResult.Text = result.ToString();
             }
         }
 
@@ -71,14 +80,24 @@ namespace DesktopCalc
         {
             if (IsInputEnter == true)
             {
-                IsInputEnter = false;
                 e.Handled = true;
+                IsInputEnter = false;
             }
         }
 
         private void tbInput_DoubleClick(object sender, EventArgs e)
         {
             tbInput.Clear();
+        }
+
+        private void ToExec(object ob)
+        {
+            Func<string> func = () => lbOperations.SelectedItem.ToString();
+            var oper = (string)Invoke(func);
+
+            var result = Calc.Exec(oper, tbInput.Text.Trim().Split(' '));
+
+            Invoke(new Action(() => lblResult.Text = result.ToString()));
         }
     }
 }

@@ -34,7 +34,7 @@
             this.lbOperations = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblResult = new System.Windows.Forms.Label();
-            this.labe2 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -108,16 +108,16 @@
             this.lblResult.Text = "-";
             this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labe2
+            // label2
             // 
-            this.labe2.AutoSize = true;
-            this.labe2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labe2.Location = new System.Drawing.Point(3, 161);
-            this.labe2.Name = "labe2";
-            this.labe2.Size = new System.Drawing.Size(83, 44);
-            this.labe2.TabIndex = 14;
-            this.labe2.Text = "Данные";
-            this.labe2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(3, 161);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(83, 44);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Данные";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel1
             // 
@@ -125,7 +125,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.68966F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.31034F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labe2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.lbOperations, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbInput, 1, 1);
@@ -167,7 +167,7 @@
         private System.Windows.Forms.ListBox lbOperations;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblResult;
-        private System.Windows.Forms.Label labe2;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
