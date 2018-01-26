@@ -79,6 +79,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CalcDB\CalcDB.csproj">
+      <Project>{a0981b4c-86ce-4dcd-864b-dd721d373f7f}</Project>
+      <Name>CalcDB</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CalcLibrary\CalcLibrary.csproj">
       <Project>{039E7338-0F69-4C72-951F-3244456A71CF}</Project>
       <Name>CalcLibrary</Name>

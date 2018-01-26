@@ -1,9 +1,12 @@
 ﻿using CalcLibrary;
+using CalcDB.Models;
+using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -38,10 +41,24 @@ namespace DesktopCalc
             }
 
             var oper = lbOperations.SelectedItem.ToString();
-
             var result = Calc.Exec(oper, tbInput.Text.Trim().Split(' '));
-
             lblResult.Text = result.ToString();
+
+            #region Сохранение в БД
+
+            var or = new OperationResult()
+            {
+                OperationId = lbOperations.SelectedIndex,
+                Result = result,
+                ExecutionTime = new Random().Next(100, 4000),
+                Error = "",
+                Args = tbInput.Text.Trim()
+            };
+
+            var operResultRepository = new OperResultRepository();
+            operResultRepository.Save(or);
+
+            #endregion
         }
 
         private void lbOperations_SelectedIndexChanged(object sender, EventArgs e)
@@ -51,18 +68,18 @@ namespace DesktopCalc
 
         private void tbInput_TextChanged(object sender, EventArgs e)
         {
-            timer?.Dispose();
+            //timer?.Dispose();
 
             btnCalc.Enabled = !string.IsNullOrWhiteSpace(tbInput.Text);
-            
-            if (string.IsNullOrWhiteSpace(tbInput.Text))
-            {
-                lblResult.Text = string.Empty;
-            }
-            else
-            {
-                timer = new System.Threading.Timer(new TimerCallback(ToExec), null, 1000, -1);
-            }
+
+            //if (string.IsNullOrWhiteSpace(tbInput.Text))
+            //{
+            //    lblResult.Text = string.Empty;
+            //}
+            //else
+            //{
+            //    timer = new System.Threading.Timer(new TimerCallback(ToExec), null, 1000, -1);
+            //}
         }
 
         private void tbInput_KeyDown(object sender, KeyEventArgs e)
