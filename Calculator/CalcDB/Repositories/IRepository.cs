@@ -7,16 +7,14 @@ using System.Threading.Tasks;
 
 namespace CalcDB.Repositories
 {
-    public interface IRepository
+    public interface IRepository<T> where T: IEntity
     {
-        OperationResult Get(long Id);
+        T Get(long Id);
 
-        void Save(OperationResult result);
+        void Save(T result);
 
         void Delete(long Id);
 
-        IList<OperationResult> GetByOperation(long Id);
-
-        IList<OperationResult> GetAll();
+        IList<T> GetAll();
     }
 }

@@ -52,10 +52,11 @@ namespace DesktopCalc
                 Result = result,
                 ExecutionTime = new Random().Next(100, 4000),
                 Error = "",
-                Args = tbInput.Text.Trim()
+                Args = tbInput.Text.Trim(),
+                CreationDate = DateTime.Now
             };
 
-            var operResultRepository = new OperResultRepository();
+            var operResultRepository = new BaseRepository<OperationResult>();
             operResultRepository.Save(or);
 
             #endregion

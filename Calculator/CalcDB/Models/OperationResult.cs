@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalcDB.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace CalcDB.Models
 {
-    public class OperationResult
+    public class OperationResult: IEntity
     {
+        #region IEntity
+
         public long Id { get; set; }
+        
+        public string TableName => "[dbo].[OperationResult]";
+
+        #endregion
 
         public long OperationId { get; set; }
 
@@ -16,13 +23,11 @@ namespace CalcDB.Models
 
         public double? Result { get; set; }
 
-        /// <summary>
-        /// Продолжительность выполнения расчета, мс
-        /// </summary>
         public long ExecutionTime { get; set; }
 
         public DateTime CreationDate { get; set; }
 
         public string Error { get; set; }
+                
     }
 }
