@@ -1,0 +1,36 @@
+﻿@model string
+
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var fio = new Tuple<string, string>(Model, ViewBag.lastname);
+    var countries = new string[] { "Турция", "Египет" };
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Name</title>
+</head>
+<body>
+    <div>
+        <h1>Меня зовут @Model</h1>
+        @{
+            Html.RenderPartial("FIO", fio);
+        }
+        <hr />
+        @MyHelpers.Lister(ViewBag.Cities)
+        <hr />
+        @Html.ListerFlat(countries)
+        <hr />
+        @using (Html.BeginForm())
+        {
+            @Html.TextBox("firstname", Model)
+            <input type="submit" value="Сохранить" />
+        }
+    </div>
+</body>
+</html>
