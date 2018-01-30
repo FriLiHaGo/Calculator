@@ -11,13 +11,9 @@ namespace CalcDB.Models
     {
         #region IEntity
 
-        public long Id
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        public long Id { get; set; }
 
-        public string TableName => throw new NotImplementedException();
+        public string TableName => "[dbo].[User]";
 
         #endregion
     }

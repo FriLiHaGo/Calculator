@@ -11,11 +11,7 @@ namespace CalcDB.Models
     {
         #region IEntity
 
-        public long Id
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
+        public long Id { get; set; }
 
         public string TableName => "[dbo].[Operation]";
 
@@ -28,6 +24,6 @@ namespace CalcDB.Models
         public string[] Columns => new string[] { "[Name]", "[OwnerId]" };
 
         public string SerialData => $"N'{Name}', {OwnerId}";
-                
+
     }
 }

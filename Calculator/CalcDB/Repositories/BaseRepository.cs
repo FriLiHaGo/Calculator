@@ -9,16 +9,6 @@ using System.Globalization;
 
 namespace CalcDB.Repositories
 {
-    /// <summary>
-    /// Сущность, хранится в БВ
-    /// </summary>
-    public interface IEntity
-    {
-        long Id { get; set; }
-
-        string TableName { get; }
-    }
-
     public class BaseRepository<T> : IRepository<T> where T : IEntity
     {
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\GitHub\Calculator\Calculator\Calculator\CalcDB\AppData\CalcDB.mdf;Integrated Security=True";
