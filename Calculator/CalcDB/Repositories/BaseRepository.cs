@@ -11,7 +11,10 @@ namespace CalcDB.Repositories
 {
     public class BaseRepository<T> : IRepository<T> where T : IEntity
     {
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\GitHub\Calculator\Calculator\Calculator\CalcDB\AppData\CalcDB.mdf;Integrated Security=True";
+        public BaseRepository()
+        {
+            enityType = typeof(T);
+        }
 
         public void Delete(long Id)
         {
@@ -20,17 +23,56 @@ namespace CalcDB.Repositories
 
         public T Get(long id)
         {
-            var all = GetAll();
-            return all.FirstOrDefault(it => it.Id == id);
+            var items = ExecQuery($"[Id] = {id}");
+            return items.FirstOrDefault();
         }
 
         public IList<T> GetAll()
         {
-            var result = new List<T>();
-            /*
-            var columnStr = string.Join("], [", typeof(T).GetColumns());
+            return ExecQuery();
+        }
 
-            var queryString = $"SELECT [Id, {columnStr}] FROM {entity.TableName} ";
+        public void Save(T entity)
+        {
+            var queryString = "";
+
+            if (entity.Id > 0)
+            {
+                queryString =
+                $"UPDATE {enityType.GetTableName()} SET {entity.GetSerialData()} WHERE Id = { entity.Id }";
+            }
+            else
+            {
+                var columnStr = string.Join("], [", entity.GetColumns());
+
+                queryString =
+                $"INSERT INTO {enityType.GetTableName()} ([{columnStr}]) VALUES({entity.GetSerialData()})";
+            }
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var command = new SqlCommand(queryString, connection);
+
+                connection.Open();
+
+                command.ExecuteNonQuery();
+            }
+        }
+
+        #region Private Members
+
+        protected IList<T> ExecQuery(string condition = "")
+        {
+            var result = new List<T>();
+
+            var columnStr = string.Join("], [", enityType.GetColumns());
+
+            var queryString = $"SELECT [Id], [{columnStr}] FROM {enityType.GetTableName()}";
+
+            if (!string.IsNullOrWhiteSpace(condition))
+            {
+                queryString += $" WHERE {condition}";
+            }
 
             using (var connection = new SqlConnection(connectionString))
             {
@@ -43,54 +85,23 @@ namespace CalcDB.Repositories
                 {
                     while (reader.Read())
                     {
-                        var or = new OperationResult()
-                        {
-                            Id = (long)reader[0],
-                            OperationId = (long)reader[1],
-                            Args = reader[2] as string,
-                            Result = reader[3] as double?,
-                            ExecutionTime = (long)reader[4],
-                            CreationDate = (DateTime)reader[5],
-                            Error = reader[6] as string
-                        };
-                        result.Add(or);
+                        var entity = reader.GetObject<T>();
+                        result.Add(entity);
                     }
                 }
                 finally
                 {
-                    // Always call Close when done reading.
                     reader.Close();
                 }
             }
-            */
+
             return result;
         }
-        
-        public void Save(T entity)
-        {
-            var queryString = "";
 
-            if (entity.Id > 0)
-            {
-                queryString =
-                $"UPDATE {entity.TableName} SET {entity.GetSerialData()} WHERE Id = { entity.Id }";
-            }
-            else
-            {
-                var columnStr = string.Join("], [", entity.GetColumns());
+        protected Type enityType { get; set; }
 
-                queryString =
-                $"INSERT INTO {entity.TableName} ([{columnStr}]) VALUES({entity.GetSerialData()})";
-            }
-
-            using (var connection = new SqlConnection(connectionString))
-            {
-                var command = new SqlCommand(queryString, connection);
-
-                connection.Open();
-
-                command.ExecuteNonQuery();
-            }
-        }
+        // todo - вынести в настройки
+        protected string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\GitHub\Calculator\Calculator\Calculator\CalcDB\AppData\CalcDB.mdf;Integrated Security=True";
+        #endregion
     }
 }

@@ -16,7 +16,7 @@ namespace WebCalc
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "My", action = "Index", id = 10 /*id = UrlParameter.Optional*/ }
+                defaults: new { controller = "Calc", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

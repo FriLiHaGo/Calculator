@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CalcDB.Repositories
 {
-    public class OperResultRepository: BaseRepository<OperationResult>
+    public class OperResultRepository: BaseRepository<OperationResult>, IOperResultRepository
     {
-        public IList<OperationResult> GetByOperation(long Id)
+        IEnumerable<OperationResult> IOperResultRepository.GetByOperation(long Id)
         {
             return null;
         }

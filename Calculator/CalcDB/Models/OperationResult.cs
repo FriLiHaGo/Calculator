@@ -12,8 +12,6 @@ namespace CalcDB.Models
         #region IEntity
 
         public long Id { get; set; }
-        
-        public string TableName => "[dbo].[OperationResult]";
 
         #endregion
 

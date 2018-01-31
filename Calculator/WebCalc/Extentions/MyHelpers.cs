@@ -20,5 +20,18 @@ namespace WebCalc.Extentions
             }
             return MvcHtmlString.Create(ul.ToString());
         }
+
+        public static MvcHtmlString Submit(this HtmlHelper html, string value)
+        {
+            var input = new TagBuilder("input");
+            input.MergeAttribute("type", "submit");
+            input.AddCssClass("btn btn-success");
+            if (!string.IsNullOrEmpty(value))
+            {
+                input.MergeAttribute("value", value);
+            }
+
+            return MvcHtmlString.Create(input.ToString());
+        }
     }
 }

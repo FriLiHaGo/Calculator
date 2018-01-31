@@ -12,7 +12,5 @@ namespace CalcDB.Repositories
     public interface IEntity
     {
         long Id { get; set; }
-
-        string TableName { get; }
     }
 }

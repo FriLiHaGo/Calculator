@@ -142,12 +142,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CalcController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Extentions\MyHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CalcModel.cs" />
+    <Compile Include="Models\OperationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -191,10 +195,16 @@
     <Content Include="Views\My\Index.cshtml" />
     <Content Include="Views\My\Name.cshtml" />
     <Content Include="Views\My\FIO.cshtml" />
+    <Content Include="Views\Calc\Index.cshtml" />
+    <Content Include="Views\Calc\Result.cshtml" />
+    <Content Include="Views\Operation\Row.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Operations.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\OperationViewModel.cshtml" />
+    <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Calc\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -208,6 +218,16 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CalcDB\CalcDB.csproj">
+      <Project>{A0981B4C-86CE-4DCD-864B-DD721D373F7F}</Project>
+      <Name>CalcDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CalcLibrary\CalcLibrary.csproj">
+      <Project>{039E7338-0F69-4C72-951F-3244456A71CF}</Project>
+      <Name>CalcLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

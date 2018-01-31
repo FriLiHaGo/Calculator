@@ -1,6 +1,7 @@
 ﻿using CalcDB.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -14,9 +15,7 @@ namespace CalcDB
 
         public static string GetTableName(this Type type)
         {
-            var t = type.GetProperty("TableName");
-
-            return "";
+            return $"[dbo].[{type.Name}]";
         }
 
         public static string[] GetColumns(this Type type)
@@ -79,6 +78,25 @@ namespace CalcDB
             return obj.Id > 0
                 ? string.Join(", ", values.Select(kv => $"[{kv.Key}] = {kv.Value}"))
                 : string.Join(", ", values.Values);
+        }
+
+        public static T GetObject<T>(this SqlDataReader reader)
+            where T : IEntity
+        {
+            var obj = Activator.CreateInstance<T>();
+
+            var props = typeof(T).GetProperties();
+            var dbNullType = typeof(DBNull);
+            foreach (var prop in props)
+            {
+                var val = reader[prop.Name];
+                if (val != null && val.GetType() != dbNullType)
+                {
+                    prop.SetValue(obj, val);
+                }
+            }
+
+            return obj;
         }
     }
 }
