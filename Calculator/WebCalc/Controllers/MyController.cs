@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WebCalc.Controllers
 {
+    [Authorize]
     public class MyController : Controller
     {
         [HttpGet]

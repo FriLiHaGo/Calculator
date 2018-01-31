@@ -142,6 +142,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CalcController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MyController.cs" />
@@ -151,6 +152,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CalcModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\OperationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +204,7 @@
     <Content Include="Views\Shared\DisplayTemplates\OperationViewModel.cshtml" />
     <Content Include="Views\Operation\Index.cshtml" />
     <Content Include="Views\Calc\History.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,54 +7,28 @@ using System.Threading.Tasks;
 
 namespace CalcDB.Models
 {
+    public enum UserStatus
+    {
+        Active = 1,
+        Blocked = 2,
+        Deleted = 3,
+        System = 4
+    }
+
     public class User : IEntity
     {
-        #region IEntity
+        public long Id { get; set; }
 
+        public string FirstName { get; set; }
 
+        public string LastName { get; set; }
 
-        public string[] Columns
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string Email { get; set; }
 
-        public long Id
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        public string Login { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public string Password { get; set; }
 
-        public string SerialData
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public string TableName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        #endregion
+        public UserStatus Status { get; set; }
     }
 }

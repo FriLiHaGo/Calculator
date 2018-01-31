@@ -18,12 +18,18 @@
                 </button>
                 @Html.ActionLink("Калькулятор", "Index", "Calc", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Операции", "Index", "Operation")</li>
-                    <li>@Html.ActionLink("История", "History", "Calc")</li>
-                </ul>
-            </div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Операции", "Index", "Operation")</li>
+                        <li>@Html.ActionLink("История", "History", "Calc")</li>
+
+                        <li>@Html.ActionLink($"{User.Identity.Name}, Выйти", "Logoff", "Account")</li>
+                    </ul>
+                </div>
+            }
         </div>
     </div>
     <div class="container body-content">
