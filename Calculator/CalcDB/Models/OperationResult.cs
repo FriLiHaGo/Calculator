@@ -17,6 +17,8 @@ namespace CalcDB.Models
 
         public long OperationId { get; set; }
 
+        public long UserId { get; set; }
+
         public string Args { get; set; }
 
         public double? Result { get; set; }

@@ -26,7 +26,7 @@
                         <li>@Html.ActionLink("Операции", "Index", "Operation")</li>
                         <li>@Html.ActionLink("История", "History", "Calc")</li>
 
-                        <li>@Html.ActionLink($"{User.Identity.Name}, Выйти", "Logoff", "Account")</li>
+                        <li>@Html.ActionLink($"{Html.GetFIO(User.Identity.Name)}, Выйти", "Logoff", "Account")</li>
                     </ul>
                 </div>
             }

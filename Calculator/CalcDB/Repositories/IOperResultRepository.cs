@@ -11,6 +11,6 @@ namespace CalcDB.Repositories
     {
         IEnumerable<OperationResult> GetByOperation(long id);
 
-        IEnumerable<OperationResult> GetByUserName(string name);
+        IEnumerable<OperationResult> GetByUserId(long id);
     }
 }

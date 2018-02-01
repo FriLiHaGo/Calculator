@@ -203,8 +203,8 @@
     <Content Include="Views\Shared\DisplayTemplates\Operations.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\OperationViewModel.cshtml" />
     <Content Include="Views\Operation\Index.cshtml" />
-    <Content Include="Views\Calc\History.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Calc\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

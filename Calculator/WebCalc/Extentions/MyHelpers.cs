@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CalcDB.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,6 +33,14 @@ namespace WebCalc.Extentions
             }
 
             return MvcHtmlString.Create(input.ToString());
+        }
+
+        public static string GetFIO(this HtmlHelper html, string name)
+        {
+            var userRepository = new UserRepository();
+            var user = userRepository.GetByLogin(name);
+
+            return string.Join(" ", user.FirstName, user.LastName);
         }
     }
 }

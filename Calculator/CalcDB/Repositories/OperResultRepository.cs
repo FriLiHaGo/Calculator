@@ -16,9 +16,9 @@ namespace CalcDB.Repositories
             return null;
         }
 
-        public IEnumerable<OperationResult> GetByUserName(string name)
+        public IEnumerable<OperationResult> GetByUserId(long id)
         {
-            throw new NotImplementedException();
+            return ExecQuery($"[UserId] = {id}");
         }
     }
 }

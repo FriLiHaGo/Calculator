@@ -11,7 +11,12 @@ namespace CalcDB.Repositories
     {
         public User GetByLogin(string login)
         {
-            throw new NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(login))
+            {
+                var user = ExecQuery($"[Login] = N'{login}'");
+                return user.ElementAtOrDefault(0);
+            }
+            return null;
         }
 
         public bool Check(string login, string password)

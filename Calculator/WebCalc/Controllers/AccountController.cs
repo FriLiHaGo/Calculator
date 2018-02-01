@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using CalcDB.Models;
 using CalcDB.Repositories;
 using WebCalc.Models;
 
@@ -15,7 +16,7 @@ namespace WebCalc.Controllers
         protected IUserRepository UserRepository { get; set; }
 
         #endregion
-
+        
         public AccountController()
         {
             UserRepository = new UserRepository();
@@ -47,7 +48,6 @@ namespace WebCalc.Controllers
             {
                 // аутентификация
                 FormsAuthentication.SetAuthCookie(model.Login, true);
-
                 return RedirectToAction("Index", "Calc");
             }
 

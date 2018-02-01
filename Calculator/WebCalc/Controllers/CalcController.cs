@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.WebPages;
+using System.Web.Security;
 using WebCalc.Models;
 
 namespace WebCalc.Controllers
@@ -20,7 +22,12 @@ namespace WebCalc.Controllers
 
         protected IOperResultRepository OperationResultRepository { get; set; }
 
+        protected IUserRepository UserRepository { get; set; }
+
         protected Calc Calc { get; set; }
+
+        protected User CurrentUser { get; set; }
+        
 
         #endregion
 
@@ -28,6 +35,7 @@ namespace WebCalc.Controllers
         {
             OperationRepository = new OperationRepository();
             OperationResultRepository = new OperResultRepository();
+            UserRepository = new UserRepository();
             Calc = new Calc();
         }
 
@@ -55,10 +63,12 @@ namespace WebCalc.Controllers
 
             #region Сохранение в БД
             var oper = OperationRepository.GetOrCreate(operation);
+            CurrentUser = UserRepository.GetByLogin(User.Identity.Name);
 
             var or = new OperationResult()
             {
                 OperationId = oper.Id,
+                UserId = CurrentUser.Id,
                 Result = result,
                 ExecutionTime = new Random().Next(100, 4000),
                 Error = "",
@@ -75,8 +85,8 @@ namespace WebCalc.Controllers
 
         public ActionResult History()
         {
-
-            return View(OperationResultRepository.GetAll());
+            CurrentUser = UserRepository.GetByLogin(User.Identity.Name);
+            return View(OperationResultRepository.GetByUserId(CurrentUser.Id));
         }
     }
 }
