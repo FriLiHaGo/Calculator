@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.WebPages;
 using System.Web.Security;
 using WebCalc.Models;
+using CalcDB.NHibernate.Repositories;
 
 namespace WebCalc.Controllers
 {
@@ -34,8 +35,8 @@ namespace WebCalc.Controllers
         public CalcController()
         {
             OperationRepository = new OperationRepository();
-            OperationResultRepository = new OperResultRepository();
-            UserRepository = new UserRepository();
+            OperationResultRepository = new NHOperResultRepository();
+            UserRepository = new NHUserRepository();
             Calc = new Calc();
         }
 

@@ -11,23 +11,25 @@ namespace CalcDB.Models
     {
         #region IEntity
 
-        public long Id { get; set; }
+        public virtual long Id { get; set; }
 
         #endregion
 
-        public long OperationId { get; set; }
+        public virtual long OperationId { get; set; }
 
-        public long UserId { get; set; }
+        public virtual User Author { get; set; }
 
-        public string Args { get; set; }
+        public virtual long UserId { get; set; }
 
-        public double? Result { get; set; }
+        public virtual string Args { get; set; }
 
-        public long ExecutionTime { get; set; }
+        public virtual double? Result { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public virtual long ExecutionTime { get; set; }
 
-        public string Error { get; set; }
+        public virtual DateTime CreationDate { get; set; }
+
+        public virtual string Error { get; set; }
                 
     }
 }

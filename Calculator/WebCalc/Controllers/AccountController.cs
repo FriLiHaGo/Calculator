@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using CalcDB.Models;
+using CalcDB.NHibernate.Repositories;
 using CalcDB.Repositories;
 using WebCalc.Models;
 
@@ -19,7 +20,7 @@ namespace WebCalc.Controllers
         
         public AccountController()
         {
-            UserRepository = new UserRepository();
+            UserRepository = new NHUserRepository();
         }
 
         [HttpGet]
